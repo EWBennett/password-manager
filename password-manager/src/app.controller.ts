@@ -1,16 +1,18 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
+import { User, UserDocument } from './user.schema';
 
 @Controller("api/app")
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get("")
   getHello(): string {
     return this.appService.getHello();
   }
-  @Get(":name")
-  getName(@Param("name") name:string): string {
-    return "Hello " + name;
+
+  @Get("users")
+  async getUsers(): Promise<UserDocument[]> {
+    return this.appService.getUsers();
   }
 }
