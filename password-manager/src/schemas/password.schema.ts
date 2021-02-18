@@ -22,7 +22,7 @@ export class Password {
   username: string;
 
   @Prop()
-  Notes: string;
+  notes: string;
 }
 
 export const PasswordSchema = SchemaFactory.createForClass(Password);

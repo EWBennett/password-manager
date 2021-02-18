@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User, UserSchema } from './schemas/user.schema';
-import { Password, PasswordSchema } from './schemas/passwords.schema';
+import { Password, PasswordSchema } from './schemas/password.schema';
 
 @Module({
   imports: [
