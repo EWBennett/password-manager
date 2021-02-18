@@ -13,7 +13,16 @@ export class Password {
   password: string;
 
   @Prop()
-  website: string;
+  name: string;
+
+  @Prop()
+  URL: string;
+
+  @Prop()
+  username: string;
+
+  @Prop()
+  Notes: string;
 }
 
 export const PasswordSchema = SchemaFactory.createForClass(Password);

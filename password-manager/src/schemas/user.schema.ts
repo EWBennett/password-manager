@@ -16,6 +16,21 @@ export class User {
 
   @Prop()
   passwordSalt: string;
+
+  @Prop()
+  passwordHint: string;
+
+  @Prop()
+  hasVerifiedEmail: boolean;
+
+  @Prop()
+  secretQuestions: { question: string; answer: string }[];
+
+  @Prop()
+  failedAttempts: number;
+
+  @Prop()
+  lastAttemptDate: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
