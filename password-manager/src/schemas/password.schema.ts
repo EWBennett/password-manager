@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, ObjectId } from 'mongoose';
-import { User } from './user.schema';
 
 export type PasswordDocument = Password & Document;
 

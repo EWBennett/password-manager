@@ -10,7 +10,9 @@ export interface PasswordDto extends PasswordBaseDto {
 
 export function fromPassword(password: PasswordDocument): PasswordDto {
   return {
+    uid: password.userID,
     name: password.name,
+    password: password.password,
     URL: password.URL,
     username: password.username,
     notes: password.notes,

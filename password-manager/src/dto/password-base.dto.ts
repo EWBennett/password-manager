@@ -1,4 +1,6 @@
+import { ObjectId } from "mongoose";
+
 export interface PasswordBaseDto {
-  uid?: string;
+  uid?: ObjectId;
   password?: string;
 }

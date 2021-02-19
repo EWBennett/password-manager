@@ -8,6 +8,7 @@ import {
   Res,
   HttpStatus,
   Patch,
+  Delete,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UserDto } from './dto/user.dto';
@@ -47,6 +48,16 @@ export class AppController {
     @Res() response: Response,
   ) {
     await this.appService.editUser(uid, body);
+    response.status(HttpStatus.OK).send();
+  }
+
+  @Delete('users/:uid')
+  async deleteUser(
+    @Body() body: UserBaseDto,
+    @Param('uid') uid: string,
+    @Res() response: Response,
+  ){
+    await this.appService.deleteUser(uid);
     response.status(HttpStatus.OK).send();
   }
 }
