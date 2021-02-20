@@ -6,7 +6,7 @@ export type PasswordDocument = Password & Document;
 @Schema()
 export class Password {
   @Prop({ type: 'ObjectId' })
-  userID: ObjectId;
+  userID: string;
 
   @Prop()
   password: string;

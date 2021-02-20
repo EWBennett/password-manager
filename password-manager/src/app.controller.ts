@@ -26,10 +26,19 @@ export class AppController {
   }
 
   @Get('users')
-  async getUsers(@Res() response: Response): Promise<void> {
+  async getAllUsers(@Res() response: Response): Promise<void> {
     const result = await this.appService.getAllUsers();
     response.status(HttpStatus.OK).send(result);
   }
+
+/*   @Get('users/:uid')
+  async getOneUser(
+    @Param('uid') uid: string,
+    @Res() response: Response,
+  ): Promise<void> {
+    const result = await this.appService.getOneUser(uid);
+    response.status(HttpStatus.OK).send(result);
+  } */
 
   @Post('users')
   async createUser(
@@ -56,7 +65,7 @@ export class AppController {
     @Body() body: UserBaseDto,
     @Param('uid') uid: string,
     @Res() response: Response,
-  ){
+  ) {
     await this.appService.deleteUser(uid);
     response.status(HttpStatus.OK).send();
   }

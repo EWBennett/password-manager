@@ -25,6 +25,11 @@ export class AppService {
     return result.map(fromUser);
   }
 
+  /* async getOneUser(uid: string): Promise<UserDto> {
+    const result = await this.userModel.findById(uid).exec();
+    return result;
+  } */
+
   async createUser(createUserDto: UserCrudDto): Promise<string> {
     const createdUser = new this.userModel(createUserDto);
     const result = await createdUser.save();
@@ -42,7 +47,7 @@ export class AppService {
     await this.userModel.deleteOne(deletedUser).exec();
   }
 
-  async createPassword(createPasswordDto: PasswordCrudDto): Promise<ObjectId> {
+  async createPassword(createPasswordDto: PasswordCrudDto): Promise<string> {
     const createdPassword = new this.passwordModel(createPasswordDto);
     const result = await createdPassword.save();
     return result.userID;
