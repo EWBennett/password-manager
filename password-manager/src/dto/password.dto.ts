@@ -2,7 +2,6 @@ import { Password, PasswordDocument } from 'src/schemas/password.schema';
 import { PasswordBaseDto } from './password-base.dto';
 
 export interface PasswordDto extends PasswordBaseDto {
-  name?: string;
   URL?: string;
   username?: string;
   notes?: string;
