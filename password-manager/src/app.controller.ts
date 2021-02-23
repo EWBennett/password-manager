@@ -31,14 +31,14 @@ export class AppController {
     response.status(HttpStatus.OK).send(result);
   }
 
-/*   @Get('users/:uid')
+  @Get('users/:uid')
   async getOneUser(
     @Param('uid') uid: string,
     @Res() response: Response,
   ): Promise<void> {
     const result = await this.appService.getOneUser(uid);
     response.status(HttpStatus.OK).send(result);
-  } */
+  }
 
   @Post('users')
   async createUser(

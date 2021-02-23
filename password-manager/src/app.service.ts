@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnsupportedMediaTypeException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId, Schema } from 'mongoose';
 import { PasswordDto } from './dto/password.dto';
@@ -25,10 +25,10 @@ export class AppService {
     return result.map(fromUser);
   }
 
-  /* async getOneUser(uid: string): Promise<UserDto> {
+  async getOneUser(uid: string): Promise<UserDto> {
     const result = await this.userModel.findById(uid).exec();
-    return result;
-  } */
+    return fromUser(result);
+  }
 
   async createUser(createUserDto: UserCrudDto): Promise<string> {
     const createdUser = new this.userModel(createUserDto);
@@ -67,7 +67,7 @@ export class AppService {
   }
 
   async deletePassword(uid: string): Promise<void> {
-    const deletedUser = this.userModel.findById(uid);
-    await this.userModel.deleteOne(deletedUser).exec();
+    const deletedPassword = this.userModel.findById(uid);
+    await this.userModel.deleteOne(deletedPassword).exec();
   }
 }
