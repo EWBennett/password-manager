@@ -72,19 +72,17 @@ export class AppService {
 
   async editPassword(
     uid: string,
+    name: string,
     editPasswordDto: PasswordCrudDto,
   ): Promise<void> {
     await this.passwordModel
-      .findByIdAndUpdate(
-        uid,
-        { ...editPasswordDto },
-        { useFindAndModify: true },
-      )
+      .findOneAndUpdate({ userID: uid, name: name }, { ...editPasswordDto })
       .exec();
   }
 
-  async deletePassword(uid: string): Promise<void> {
-    const deletedPassword = this.userModel.findById(uid);
-    await this.userModel.deleteOne(deletedPassword).exec();
+  async deletePassword(uid: string, name: string): Promise<void> {
+    await this.passwordModel
+      .findOneAndDelete({ userID: uid, name: name })
+      .exec();
   }
 }

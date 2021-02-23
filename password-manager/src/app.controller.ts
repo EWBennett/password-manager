@@ -96,23 +96,33 @@ export class AppController {
     response.status(HttpStatus.OK).send();
   }
 
-  @Patch('passwords/:uid')
+  @Patch('passwords/:uid/:name')
   async updatePassword(
     @Body() body: PasswordBaseDto,
     @Param('uid') uid: string,
+    @Param('name') name: string,
     @Res() response: Response,
   ) {
-    await this.appService.editPassword(uid, body);
+    await this.appService.editPassword(uid, name, body);
     response.status(HttpStatus.OK).send();
   }
 
   @Delete('users/:uid')
   async deleteUser(
-    @Body() body: UserBaseDto,
     @Param('uid') uid: string,
     @Res() response: Response,
   ) {
     await this.appService.deleteUser(uid);
+    response.status(HttpStatus.OK).send();
+  }
+
+  @Delete('passwords/:uid/:name')
+  async deletePassword(
+    @Param('uid') uid: string,
+    @Param('name') name: string,
+    @Res() response: Response,
+  ) {
+    await this.appService.deletePassword(uid, name);
     response.status(HttpStatus.OK).send();
   }
 }
