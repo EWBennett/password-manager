@@ -25,8 +25,8 @@ export class AppService {
     return result.map(fromUser);
   }
 
-  async getOneUser(uid: string): Promise<UserDto> {
-    const result = await this.userModel.findById(uid).exec();
+  async getOneUser(userID: string): Promise<UserDto> {
+    const result = await this.userModel.findById(userID).exec();
     return fromUser(result);
   }
 
@@ -36,14 +36,14 @@ export class AppService {
     return result._id;
   }
 
-  async editUser(uid: string, editUserDto: UserCrudDto): Promise<void> {
+  async editUser(userID: string, editUserDto: UserCrudDto): Promise<void> {
     await this.userModel
-      .findByIdAndUpdate(uid, { ...editUserDto }, { useFindAndModify: true })
+      .findByIdAndUpdate(userID, { ...editUserDto }, { useFindAndModify: true })
       .exec();
   }
 
-  async deleteUser(uid: string): Promise<void> {
-    const deletedUser = this.userModel.findById(uid);
+  async deleteUser(userID: string): Promise<void> {
+    const deletedUser = this.userModel.findById(userID);
     await this.userModel.deleteOne(deletedUser).exec();
   }
 
@@ -52,37 +52,37 @@ export class AppService {
     return result.map(fromPassword);
   }
 
-  async getAllPasswordsForUser(uid: string): Promise<PasswordDto[]> {
-    const result = await this.passwordModel.find({ userID: uid }).exec();
+  async getAllPasswordsForUser(userID: string): Promise<PasswordDto[]> {
+    const result = await this.passwordModel.find({ userID: userID }).exec();
     return result.map(fromPassword);
   }
 
-  async getPasswordsForUser(uid: string, name: string): Promise<PasswordDto[]> {
-    const result = await this.passwordModel
-      .find({ userID: uid, name: name })
-      .exec();
-    return result.map(fromPassword);
+  async getOnePassword(passwordID: string): Promise<PasswordDto> {
+    const result = await this.passwordModel.findById(passwordID).exec();
+    return fromPassword(result);
   }
 
   async createPassword(createPasswordDto: PasswordCrudDto): Promise<string> {
     const createdPassword = new this.passwordModel(createPasswordDto);
     const result = await createdPassword.save();
-    return result.userID;
+    return result._id;
   }
 
   async editPassword(
-    uid: string,
-    name: string,
+    passwordID: string,
     editPasswordDto: PasswordCrudDto,
   ): Promise<void> {
-    await this.passwordModel
-      .findOneAndUpdate({ userID: uid, name: name }, { ...editPasswordDto })
+    await this.userModel
+      .findByIdAndUpdate(
+        passwordID,
+        { ...editPasswordDto },
+        { useFindAndModify: true },
+      )
       .exec();
   }
 
-  async deletePassword(uid: string, name: string): Promise<void> {
-    await this.passwordModel
-      .findOneAndDelete({ userID: uid, name: name })
-      .exec();
+  async deletePassword(passwordID: string): Promise<void> {
+    const deletedPassword = this.userModel.findById(passwordID);
+    await this.passwordModel.deleteOne(deletedPassword).exec();
   }
 }
