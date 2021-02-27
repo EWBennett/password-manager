@@ -98,7 +98,7 @@ export class AppController {
   @Patch('passwords/:passwordID')
   async updatePassword(
     @Body() body: PasswordBaseDto,
-    @Param() passwordID: string,
+    @Param('passwordID') passwordID: string,
     @Res() response: Response,
   ) {
     await this.appService.editPassword(passwordID, body);

@@ -72,7 +72,7 @@ export class AppService {
     passwordID: string,
     editPasswordDto: PasswordCrudDto,
   ): Promise<void> {
-    await this.userModel
+    await this.passwordModel
       .findByIdAndUpdate(
         passwordID,
         { ...editPasswordDto },
