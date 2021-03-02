@@ -2,7 +2,7 @@ import { Password, PasswordDocument } from 'src/schemas/password.schema';
 import { PasswordBaseDto } from './password-base.dto';
 
 export interface PasswordDto extends PasswordBaseDto {
-  passwordID?: string;
+  id?: string;
   name?: string;
   URL?: string;
   username?: string;
@@ -11,7 +11,7 @@ export interface PasswordDto extends PasswordBaseDto {
 
 export function fromPassword(password: PasswordDocument): PasswordDto {
   return {
-    passwordID: password._id,
+    id: password._id,
     userID: password.userID,
     name: password.name,
     password: password.password,
