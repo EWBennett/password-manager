@@ -4,19 +4,22 @@ import { User, UserSchema } from './schemas/user.schema';
 import { Password, PasswordSchema } from './schemas/password.schema';
 import { UserModule } from './modules/user/user.module';
 import { PasswordModule } from './modules/password/password.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { config } from 'dotenv';
+
+config();
 
 @Module({
   imports: [
     UserModule,
     PasswordModule,
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/password-db'),
+    AuthModule,
+    MongooseModule.forRoot(process.env.DATABASE_ADDRESS),
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Password.name, schema: PasswordSchema },
     ]),
   ],
-  exports: [
-    MongooseModule
-  ]
+  exports: [MongooseModule, UserModule],
 })
 export class AppModule {}

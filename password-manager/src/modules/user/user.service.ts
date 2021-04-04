@@ -7,6 +7,7 @@ import { UserCrudDto } from 'src/dto/user-crud.dto';
 import { UserDto, fromUser } from 'src/dto/user.dto';
 import { Password, PasswordDocument } from 'src/schemas/password.schema';
 import { User, UserDocument } from 'src/schemas/user.schema';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -25,15 +26,31 @@ export class UserService {
     return fromUser(result);
   }
 
+  async getByUsername(username: string): Promise<UserDocument> {
+    const result = await this.userModel.findOne({ username }).exec();
+    return result;
+  }
+
   async createUser(createUserDto: UserCrudDto): Promise<string> {
     const createdUser = new this.userModel(createUserDto);
     const result = await createdUser.save();
     return result._id;
   }
 
+  /**
+   * Update a user
+   * @param userID
+   * @param editUserDto
+   */
   async editUser(userID: string, editUserDto: UserCrudDto): Promise<void> {
+    const passwordSalt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(editUserDto.password, passwordSalt);
     await this.userModel
-      .findByIdAndUpdate(userID, { ...editUserDto }, { useFindAndModify: true })
+      .findByIdAndUpdate(
+        userID,
+        { ...editUserDto, passwordHash },
+        { useFindAndModify: true },
+      )
       .exec();
   }
 

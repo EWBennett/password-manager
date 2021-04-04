@@ -9,11 +9,13 @@ import {
   HttpStatus,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserBaseDto } from 'src/dto/user-base.dto';
 import { Response, Request } from 'express';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/users')
 @ApiTags('User')
@@ -21,6 +23,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('')
+  @UseGuards(AuthGuard('JWT'))
   async getAllUsers(@Res() response: Response): Promise<void> {
     const result = await this.userService.getAllUsers();
     response.status(HttpStatus.OK).send(result);

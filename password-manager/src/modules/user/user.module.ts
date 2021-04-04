@@ -9,5 +9,6 @@ import { UserService } from './user.service';
   imports: [forwardRef(() => AppModule)],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService]
 })
 export class UserModule {}

@@ -15,9 +15,6 @@ export class User {
   passwordHash: string;
 
   @Prop()
-  passwordSalt: string;
-
-  @Prop()
   passwordHint: string;
 
   @Prop()
