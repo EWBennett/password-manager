@@ -16,20 +16,30 @@ import { Response, Request } from 'express';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { JWT_STRATEGY } from '../auth/jwt.strategy';
+import { Role, Roles } from 'src/roles';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('api/users')
 @ApiTags('User')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  /**
+   *
+   * @param response
+   */
   @Get('')
-  @UseGuards(AuthGuard('JWT'))
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async getAllUsers(@Res() response: Response): Promise<void> {
     const result = await this.userService.getAllUsers();
     response.status(HttpStatus.OK).send(result);
   }
 
   @Post('')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async createUser(
     @Body() body: UserBaseDto,
     @Res() response: Response,
@@ -40,6 +50,8 @@ export class UserController {
   }
 
   @Get(':userID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async getOneUser(
     @Param('userID') userID: string,
     @Res() response: Response,
@@ -49,6 +61,8 @@ export class UserController {
   }
 
   @Patch(':userID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async updateUser(
     @Body() body: UserBaseDto,
     @Param('userID') userID: string,
@@ -59,6 +73,8 @@ export class UserController {
   }
 
   @Delete(':userID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async deleteUser(@Param('userID') userID: string, @Res() response: Response) {
     await this.userService.deleteUser(userID);
     response.status(HttpStatus.OK).send();

@@ -4,6 +4,7 @@ import { fromUser, UserDto } from 'src/dto/user.dto';
 import { UserDocument } from 'src/schemas/user.schema';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
+import { AuthTokenPayload } from './jwt.strategy';
 
 @Injectable()
 export class AuthService {
@@ -33,7 +34,11 @@ export class AuthService {
    * @returns An object containing the access token
    */
   async login(user: UserDocument) {
-    const payload = { username: user.username, sub: user.id };
+    const payload: AuthTokenPayload = {
+      username: user.username,
+      sub: user.id,
+      role: user.role,
+    };
     return {
       access_token: this.jwtService.sign(payload),
     };

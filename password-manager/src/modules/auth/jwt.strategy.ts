@@ -2,11 +2,14 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { config } from 'dotenv';
+import { Role } from 'src/roles';
 
 config();
 
+export const JWT_STRATEGY = 'JWT';
+
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
+export class JwtStrategy extends PassportStrategy(Strategy, JWT_STRATEGY) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -15,7 +18,18 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
     });
   }
 
-  async validate(payload: any) {
+  /**
+   * Creates a JWT token for a user
+   * @param payload
+   * @returns The token
+   */
+  async validate(payload: AuthTokenPayload) {
     return { userId: payload.sub, username: payload.username };
   }
+}
+
+export interface AuthTokenPayload {
+  sub: string;
+  username: string;
+  role: Role;
 }
