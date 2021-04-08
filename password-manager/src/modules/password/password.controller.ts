@@ -9,11 +9,16 @@ import {
   HttpStatus,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PasswordService } from './password.service';
 import { Response, Request } from 'express';
 import { PasswordBaseDto } from 'src/dto/password-base.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Role, Roles } from 'src/roles';
+import { JWT_STRATEGY } from '../auth/jwt.strategy';
+import { RolesGuard } from '../auth/roles.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/passwords')
 @ApiTags('Password')
@@ -30,12 +35,16 @@ export class PasswordController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Something went wrong',
   })
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async getAllPasswords(@Res() response: Response): Promise<void> {
     const result = await this.passwordService.getAllPasswords();
     response.status(HttpStatus.OK).send(result);
   }
 
   @Get(':userID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async getAllPasswordsForUser(
     @Param('userID') userID: string,
     @Res() response: Response,
@@ -45,6 +54,8 @@ export class PasswordController {
   }
 
   @Post('')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async createPassword(
     @Body() body: PasswordBaseDto,
     @Res() response: Response,
@@ -55,6 +66,8 @@ export class PasswordController {
   }
 
   @Get(':passwordID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async getOnePassword(
     @Param('passwordID') passwordID: string,
     @Res() response: Response,
@@ -64,6 +77,8 @@ export class PasswordController {
   }
 
   @Patch(':passwordID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async updatePassword(
     @Body() body: PasswordBaseDto,
     @Param('passwordID') passwordID: string,
@@ -74,6 +89,8 @@ export class PasswordController {
   }
 
   @Delete(':passwordID')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async deletePassword(
     @Param('passwordID') passwordID: string,
     @Res() response: Response,

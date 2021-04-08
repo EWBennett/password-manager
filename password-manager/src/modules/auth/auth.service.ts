@@ -20,7 +20,9 @@ export class AuthService {
    * @returns The user if validated, otherwise returns null
    */
   async validateUser(username: string, password: string): Promise<UserDto> {
+    //Get a user by username
     const user = await this.userservice.getByUsername(username);
+    //Hash the passed through password and compare it to the user's stored hashed password
     if (await bcrypt.compare(password, user.passwordHash)) {
       const result = fromUser(user);
       return result;
@@ -34,6 +36,7 @@ export class AuthService {
    * @returns An object containing the access token
    */
   async login(user: UserDocument) {
+    //Create a payload for the token of the user's username, id, and role
     const payload: AuthTokenPayload = {
       username: user.username,
       sub: user.id,

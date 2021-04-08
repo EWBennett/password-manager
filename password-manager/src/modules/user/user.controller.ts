@@ -25,10 +25,6 @@ import { RolesGuard } from '../auth/roles.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  /**
-   *
-   * @param response
-   */
   @Get('')
   @Roles(Role.Admin)
   @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
