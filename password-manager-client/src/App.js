@@ -1,26 +1,30 @@
-import logo from "./logo.svg";
+import React, { Component } from "react";
+import { HashRouter as Router, Route, NavLink } from "react-router-dom";
+import signUp from "./pages/signUp";
+import logIn from "./pages/logIn";
+
 import "./App.css";
 
 function App() {
-  const ax = "Ed";
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. Hello {ax}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename="/react-ui">
+      <div className="App">
+        <div className="appForm">
+          <div className="formTitle">
+            <NavLink to="/signup" activeClassName="formTitleLinkActive" className="formTitleLink">
+              Create an account
+            </NavLink>
+            {""}
+            or{""}
+            <NavLink to="/login" activeClassName="formTitleLinkActive" className="formTitleLink">
+              Log in
+            </NavLink>
+          </div>
+          <Route exact path="/login" component={logIn} />
+          <Route exact path="/signup" component={signUp} />
+        </div>
+      </div>
+    </Router>
   );
 }
 

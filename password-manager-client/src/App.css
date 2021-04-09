@@ -1,38 +1,100 @@
+:root {
+  --purple: #7a01ff;
+  --pink: #ff00d7;
+  --dark-grey: #41374C;
+  --light-grey: #faf8fb;
+  background-color: var(--dark-grey);
+}
+
 .App {
+  height: 100%;
+  width: 100%;
+  display:block;
   text-align: center;
+  align-items: center;
+  color: white;
+  background-color: var(--dark-grey);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.appForm {
+  background-color: var(--dark-grey);
+  text-align: center;
+  align-items: center;
+  overflow: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.appHeader {
+  background-color: var(--dark-grey);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.appLink {
+  color: var(--purple);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.formCentre {
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.formTitle{
+  color: white;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.formTitleLink {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+}
+
+.formTitleLinkActive {
+  color: var(--purple);
+  border-bottom: 1px solid var(--purple);
+}
+
+.formField {
+  margin-bottom: 40px;
+}
+
+.formFieldLabel {
+  text-align: left;
+  display: block;
+  font-size: 1em;
+  color: white;
+  margin-top: 10px;
+}
+
+.formFieldInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  border-bottom: 1px solid var(--purple);
+  font-size: 1em;
+  font-weight: 300;
+  padding-bottom: 1px;
+  margin-bottom: 10px;
+}
+
+.formFieldButton {
+  width: 100%;
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 15px 70px;
+  font-size: 0.8em;
+  font-weight: 500;
 }
