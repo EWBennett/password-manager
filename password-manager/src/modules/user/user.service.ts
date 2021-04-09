@@ -8,6 +8,14 @@ import { UserDto, fromUser } from 'src/dto/user.dto';
 import { Password, PasswordDocument } from 'src/schemas/password.schema';
 import { User, UserDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import {
+  AuthTokenPayload,
+  JwtStrategy,
+  JWT_STRATEGY,
+} from '../auth/jwt.strategy';
+import { ExtractJwt } from 'passport-jwt';
+import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 
 @Injectable()
 export class UserService {

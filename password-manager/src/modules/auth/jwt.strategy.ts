@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, JWT_STRATEGY) {
 
   /**
    * Creates a JWT token for a user
-   * @param payload
+   * @param {AuthTokenPayload} payload
    * @returns The token
    */
   async validate(payload: AuthTokenPayload) {

@@ -4,7 +4,7 @@ import {
   Get,
   Param,
   Post,
-  Req,
+  Request,
   Res,
   HttpStatus,
   Patch,
@@ -12,13 +12,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PasswordService } from './password.service';
-import { Response, Request } from 'express';
+import { request, Response } from 'express';
 import { PasswordBaseDto } from 'src/dto/password-base.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Role, Roles } from 'src/roles';
 import { JWT_STRATEGY } from '../auth/jwt.strategy';
 import { RolesGuard } from '../auth/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
+import { brotliDecompress } from 'zlib';
 
 @Controller('api/passwords')
 @ApiTags('Password')
@@ -42,6 +43,35 @@ export class PasswordController {
     response.status(HttpStatus.OK).send(result);
   }
 
+  @Get('me')
+  @Roles(Role.Admin, Role.User)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
+  async getAllPasswordsForSelf(
+    @Request() request,
+    @Res() response: Response,
+  ): Promise<void> {
+    const result = await this.passwordService.getAllPasswordsForUser(
+      request.user.userId,
+    );
+    response.status(HttpStatus.OK).send(result);
+  }
+
+  @Get('me/:passwordID')
+  @Roles(Role.Admin, Role.User)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
+  async getOnePasswordForSelf(
+    @Request() request,
+    @Param('passwordID') passwordID: string,
+    @Res() response: Response,
+  ): Promise<void> {
+    const result = await this.passwordService.getOnePassword(passwordID);
+    if (result.userID == request.user.userId) {
+      response.status(HttpStatus.OK).send(result);
+    } else {
+      response.status(HttpStatus.UNAUTHORIZED).send();
+    }
+  }
+
   @Get(':userID')
   @Roles(Role.Admin)
   @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
@@ -51,6 +81,20 @@ export class PasswordController {
   ): Promise<void> {
     const result = await this.passwordService.getAllPasswordsForUser(userID);
     response.status(HttpStatus.OK).send(result);
+  }
+
+  @Post('me')
+  @Roles(Role.Admin, Role.User)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
+  async createPasswordForSelf(
+    @Body() body: PasswordBaseDto,
+    @Request() request,
+    @Res() response: Response,
+  ): Promise<void> {
+    body.userID = request.user.userId;
+    response
+      .status(HttpStatus.CREATED)
+      .send(await this.passwordService.createPassword(body));
   }
 
   @Post('')
@@ -76,6 +120,20 @@ export class PasswordController {
     response.status(HttpStatus.OK).send(result);
   }
 
+  @Patch('me/:passwordID')
+  @Roles(Role.Admin, Role.User)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
+  async updatePasswordForSelf(
+    @Body() body: PasswordBaseDto,
+    @Request() request,
+    @Param('passwordID') passwordID: string,
+    @Res() response: Response,
+  ) {
+    body.userID = request.user.userId;
+    await this.passwordService.editPassword(passwordID, body);
+    response.status(HttpStatus.OK).send();
+  }
+
   @Patch(':passwordID')
   @Roles(Role.Admin)
   @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
@@ -86,6 +144,23 @@ export class PasswordController {
   ) {
     await this.passwordService.editPassword(passwordID, body);
     response.status(HttpStatus.OK).send();
+  }
+
+  @Delete('me/:passwordID')
+  @Roles(Role.Admin, Role.User)
+  @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
+  async deletePasswordForSelf(
+    @Param('passwordID') passwordID: string,
+    @Request() request,
+    @Res() response: Response,
+  ) {
+    const result = await this.passwordService.getOnePassword(passwordID);
+    if (result.userID == request.user.userId) {
+      await this.passwordService.deletePassword(passwordID);
+      response.status(HttpStatus.OK).send();
+    } else {
+      response.status(HttpStatus.UNAUTHORIZED).send();
+    }
   }
 
   @Delete(':passwordID')
