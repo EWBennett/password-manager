@@ -1,69 +1,61 @@
 :root {
-  --purple: #7a01ff;
-  --pink: #ff00d7;
-  --dark-grey: #41374C;
-  --light-grey: #faf8fb;
-  background-color: var(--dark-grey);
+  --purple: #780eea;
+  --pink: #ec00c7;
+  --dark-grey: #413C47;
+  --light-grey: #faf9fa;
+  background-color: var(--light-grey);
 }
 
 .App {
-  height: 100%;
-  width: 100%;
-  display:block;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
   text-align: center;
   align-items: center;
+  justify-content: center;
   color: white;
-  background-color: var(--dark-grey);
+  background-color: var(--light-grey);
 }
 
 .appForm {
-  background-color: var(--dark-grey);
+  background-color: var(--light-grey);
   text-align: center;
   align-items: center;
+  justify-content: center;
   overflow: auto;
 }
 
-.appHeader {
-  background-color: var(--dark-grey);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.appLink {
-  color: var(--purple);
-}
-
 .formCentre {
-  margin-bottom: 100px;
+  width: fit-content;
+  align-items: center;
   display: flex;
   justify-content: center;
+  border-radius: 7.5px;
+  padding: 5%;
+  background-color: var(--dark-grey);
 }
 
-.formTitle{
-  color: white;
+.formTitle {
+  color: var(--purple);
   font-weight: 300;
   margin-bottom: 50px;
 }
 
 .formTitleLink {
-  color: white;
+  color: var(--purple);
   text-decoration: none;
-  display: inline-block;
-  font-size: 1.7em;
+  display: inline;
+  font-size: 1.5em;
   margin: 0 10px;
   padding-bottom: 5px;
 }
 
 .formTitleLinkActive {
-  color: var(--purple);
-  border-bottom: 1px solid var(--purple);
+  color: var(--pink);
+  border-bottom: 1px solid var(--pink);
 }
 
-.formField {
-  margin-bottom: 40px;
+.formFields {
 }
 
 .formFieldLabel {
@@ -71,7 +63,7 @@
   display: block;
   font-size: 1em;
   color: white;
-  margin-top: 10px;
+  margin-bottom: 3px;
 }
 
 .formFieldInput {
@@ -80,21 +72,20 @@
   border: none;
   color: white;
   outline: none;
-  border-bottom: 1px solid var(--purple);
+  border-bottom: 1px solid var(--pink);
   font-size: 1em;
   font-weight: 300;
-  padding-bottom: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .formFieldButton {
   width: 100%;
-  background-color: var(--purple);
+  background-color: var(--pink);
   color: white;
   border: none;
   outline: none;
-  border-radius: 5px;
+  border-radius: 7.5px;
   padding: 15px 70px;
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: 500;
 }
