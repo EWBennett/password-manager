@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route, NavLink } from "react-router-dom";
 import welcome from "./welcome";
+import passwordForm from "../components/passwordForm";
 
 class frontPage extends Component {
   constructor() {
