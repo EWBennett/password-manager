@@ -5,12 +5,12 @@ import * as fs from 'fs';
 
 async function bootstrap() {
   const httpsOptions = {
-    key: fs.readFileSync('./secrets/private-key.pem'),
-    cert: fs.readFileSync('./secrets/public-certificate.pem'),
+    key: fs.readFileSync(process.env.KEY_PATH),
+    cert: fs.readFileSync(process.env.CERT_PATH),
   };
   const app = await NestFactory.create(AppModule, {
-  httpsOptions,
-});
+    httpsOptions,
+  });
   const openApiConfig = new DocumentBuilder()
     .setTitle("Ed's Password Manager")
     .setDescription('This is a cool password manager')

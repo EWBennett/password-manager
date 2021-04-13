@@ -8,6 +8,6 @@ class newPassword extends Component{
     render(){
         return(
             
-        )
+        );
     }
 }

@@ -1,8 +1,8 @@
 :root {
-  --primary: #780eea;
-  --accent: #ec00c7;
-  --background-primary: #faf9fa;
-  --background-accent: #413c47;
+  --primary: #7a01ff;
+  --accent: #ff0184;
+  --background-primary: white;
+  --background-accent: #424242;
   --text-colour: white;
   background-color: var(--background-primary);
 }
@@ -23,16 +23,16 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  display: inline-block;
   overflow: auto;
 }
 
 .formCentre {
   width: fit-content;
   align-items: center;
-  display: flex;
   justify-content: center;
   border-radius: 7.5px;
-  padding: 5%;
+  padding: 3%;
   background-color: var(--background-accent);
 }
 
@@ -54,9 +54,6 @@
 .formTitleLinkActive {
   color: var(--accent);
   border-bottom: 1px solid var(--accent);
-}
-
-.formFields {
 }
 
 .formFieldLabel {

@@ -8,6 +8,6 @@ class vault extends Component{
     render(){
         return(
             
-        )
+        );
     }
 }

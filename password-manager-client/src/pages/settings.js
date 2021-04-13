@@ -8,6 +8,6 @@ class settings extends Component{
     render(){
         return(
             
-        )
+        );
     }
 }
