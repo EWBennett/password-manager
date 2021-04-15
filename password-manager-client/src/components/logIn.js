@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Grid, Paper } from "@material-ui/core";
 import { Formik, withFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -9,42 +9,47 @@ const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
 
   return (
-    <div className="formCentre">
-      <form className="formFields" onSubmit={handleSubmit}>
-        <TextField
-          required
-          id="username"
-          color="primary"
-          variant="outlined"
-          label="Username"
-          placeholder="Username"
-          autoComplete="username"
-          value={values.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.username && Boolean(errors.username)}
-          autoFocus
-        />
-        <TextField
-          required
-          id="password"
-          color="primary"
-          variant="outlined"
-          label="Password"
-          placeholder="Password"
-          type="password"
-          autoComplete="password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.password && Boolean(errors.password)}
-          helperText={touched.password && errors.password}
-        />
-        <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
-          Sign Up
-        </Button>
-      </form>
-    </div>
+    <form className="formFields" onSubmit={handleSubmit}>
+      <Grid container direction="column" spacing={2}>
+        <Grid item>
+          <TextField
+            required
+            id="username"
+            color="primary"
+            variant="outlined"
+            label="Username"
+            placeholder="Username"
+            autoComplete="username"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.username && Boolean(errors.username)}
+            autoFocus
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            required
+            id="password"
+            color="primary"
+            variant="outlined"
+            label="Password"
+            placeholder="Password"
+            type="password"
+            autoComplete="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+          />
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
+            Sign Up
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 
