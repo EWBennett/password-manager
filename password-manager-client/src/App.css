@@ -14,76 +14,71 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  color: var(--text-colour);
-  background-color: var(--background-primary);
 }
 
-.appForm {
-  background-color: var(--background-primary);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  display: inline-block;
-  overflow: auto;
-}
-
-.formCentre {
-  width: fit-content;
-  align-items: center;
-  justify-content: center;
-  border-radius: 7.5px;
-  padding: 3%;
-  background-color: var(--background-accent);
-}
-
-.formTitle {
-  color: var(--primary);
-  font-weight: 300;
-  margin-bottom: 50px;
-}
-
-.formTitleLink {
-  color: var(--primary);
-  text-decoration: none;
-  display: inline;
-  font-size: 1.5em;
-  margin: 0 10px;
-  padding-bottom: 5px;
-}
-
-.formTitleLinkActive {
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent);
-}
-
-.formFieldLabel {
-  text-align: left;
-  display: block;
-  font-size: 1em;
-  color: var(--text-colour);
-  margin-bottom: 3px;
-}
-
-.formFieldInput {
+.pageBackground {
   width: 100%;
-  background-color: transparent;
-  border: none;
-  color: var(--text-colour);
-  outline: none;
-  border-bottom: 1px solid var(--accent);
-  font-size: 1em;
-  font-weight: 300;
-  margin-bottom: 20px;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  background-color: rgb(121, 49, 225);
+  background-image: linear-gradient(rgb(121, 49, 225) 0%, rgb(54, 38, 138) 100%);
+  overflow: hidden;
 }
 
-.formFieldButton {
+.pageContent {
+  position: relative;
+  padding-top: 100px;
   width: 100%;
-  background-color: var(--accent);
-  color: var(--text-colour);
-  border: none;
-  outline: none;
-  border-radius: 7.5px;
-  padding: 15px 70px;
-  font-size: 1em;
-  font-weight: 500;
+  max-width: 1170px;
+  margin: 0px auto;
+}
+
+.contentWrap {
+  display: flex;
+  flex-flow: initial;
+  -moz-box-pack: initial;
+  justify-content: initial;
+  -moz-box-align: initial;
+  align-items: initial;
+}
+
+.title {
+  min-width: 690px;
+}
+
+.paragraphWrap {
+  box-sizing: border-box;
+  margin-top: 120px;
+  margin-left: 90px;
+}
+
+.paragraphContent {
+  width: auto;
+  max-width: 450px;
+  padding-bottom: 10px;
+}
+
+.imageWrap {
+  z-index: 0;
+  max-width: 100%;
+  margin-left: -80px;
+}
+
+.image {
+  width: 1000px;
+  height: 750px;
+  border-style: none;
+}
+
+.logo {
+  width: 51px;
+  height: 80px;
+  border-style: none;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.formWrap {
+  margin: 10px;
 }

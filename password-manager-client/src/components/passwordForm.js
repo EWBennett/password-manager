@@ -11,7 +11,7 @@ const form = (props) => {
   return (
     <Paper elevation={3}>
       <form className="formFields" onSubmit={handleSubmit}>
-        <Grid container direction="column" justify="space-around">
+        <Grid container direction="column" spacing={2}>
           <TextField
             required
             id="passwordName"
@@ -26,7 +26,6 @@ const form = (props) => {
             helperText={touched.passwordName ** Boolean(errors.passwordName)}
             autoFocus
           />
-
           <TextField
             id="URL"
             color="primary"
