@@ -4,12 +4,18 @@ import { AppModule } from './app.module';
 import * as fs from 'fs';
 
 async function bootstrap() {
-  const httpsOptions = {
-    key: fs.readFileSync(process.env.KEY_PATH),
-    cert: fs.readFileSync(process.env.CERT_PATH),
-  };
+  // const httpsOptions = {
+  //   key: fs.readFileSync(process.env.KEY_PATH),
+  //   cert: fs.readFileSync(process.env.CERT_PATH),
+  // };
   const app = await NestFactory.create(AppModule, {
-    httpsOptions,
+    //httpsOptions,
+  });
+  app.enableCors({
+    origin: 'localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   });
   const openApiConfig = new DocumentBuilder()
     .setTitle("Ed's Password Manager")
@@ -23,6 +29,6 @@ async function bootstrap() {
     app,
     SwaggerModule.createDocument(app, openApiConfig),
   );
-  await app.listen(3000);
+  await app.listen(3100);
 }
 bootstrap();

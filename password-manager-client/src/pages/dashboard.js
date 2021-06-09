@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { AppBar, Drawer, IconButton, Toolbar, Typography } from "@material-ui/core";
-import { MenuIcon, ChevronLeftIcon } from "@material-ui/icons";
+import { AppBar, Drawer, IconButton, Toolbar, Typography, Divider } from "@material-ui/core";
 
 class dashboard extends Component {
   constructor() {
@@ -16,10 +15,8 @@ class dashboard extends Component {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={handleDrawerOpen}
-            >
-              <MenuIcon />
-            </IconButton>
+              //onClick={handleDrawerOpen}
+            ></IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap>
               Your Dashboard
             </Typography>
@@ -27,12 +24,11 @@ class dashboard extends Component {
         </AppBar>
         <Drawer variant="permanent">
           <div className="toolbarIcon">
-            <IconButton onclick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
+            <IconButton
+            //onclick={handleDrawerClose}
+            ></IconButton>
           </div>
-          <Divider/>
-          
+          <Divider />
         </Drawer>
       </div>
     );

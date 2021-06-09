@@ -8,6 +8,14 @@ import { Link } from "react-router-dom";
 const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
 
+  async function logIn() {
+    const { username, password } = values;
+    const response = await axios.post("http://localhost:3100/api/auth/login", {
+      username,
+      password,
+    });
+  }
+
   return (
     <form className="formFields" onSubmit={handleSubmit}>
       <Grid container direction="column" spacing={1}>
@@ -44,7 +52,13 @@ const form = (props) => {
           />
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
+            disabled={isSubmitting}
+            onClick={logIn}
+          >
             Sign Up
           </Button>
         </Grid>

@@ -19,6 +19,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWT_STRATEGY } from '../auth/jwt.strategy';
 import { Role, Roles } from 'src/roles';
 import { RolesGuard } from '../auth/roles.guard';
+import { UserCrudDto } from 'src/dto/user-crud.dto';
 
 @Controller('api/users')
 @ApiTags('User')
@@ -37,7 +38,17 @@ export class UserController {
   @Roles(Role.Admin)
   @UseGuards(AuthGuard(JWT_STRATEGY), RolesGuard)
   async createUser(
-    @Body() body: UserBaseDto,
+    @Body() body: UserCrudDto,
+    @Res() response: Response,
+  ): Promise<void> {
+    response
+      .status(HttpStatus.CREATED)
+      .send(await this.userService.createUser(body));
+  }
+
+  @Post('signup')
+  async signUp(
+    @Body() body: UserCrudDto,
     @Res() response: Response,
   ): Promise<void> {
     response

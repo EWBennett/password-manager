@@ -4,9 +4,20 @@ import { Formik, withFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { SignalCellularNullSharp } from "@material-ui/icons";
 
 const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
+
+  async function signUp() {
+    const { username, email, password, passwordHint } = values;
+    const response = await axios.post("http://localhost:3100/api/users/signup", {
+      username,
+      email,
+      password,
+      passwordHint,
+    });
+  }
 
   return (
     <form className="formFields" onSubmit={handleSubmit}>
@@ -79,18 +90,24 @@ const form = (props) => {
         </Grid>
         <Grid item>
           <TextField
-            id="hint"
+            id="passwordHint"
             color="primary"
             variant="outlined"
             label="Password Hint"
             placeholder="Hint"
-            value={values.hint}
+            value={values.passwordHint}
             onChange={handleChange}
             onBlur={handleBlur}
           />
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
+            disabled={isSubmitting}
+            onClick={signUp}
+          >
             Sign Up
           </Button>
         </Grid>
@@ -100,13 +117,13 @@ const form = (props) => {
 };
 
 const signUp = withFormik({
-  mapPropsToValues: ({ username, email, password, confirmPassword, hint }) => {
+  mapPropsToValues: ({ username, email, password, confirmPassword, passwordHint }) => {
     return {
       username: username || "",
       email: email || "",
       password: password || "",
       confirmPassword: confirmPassword || "",
-      hint: hint || "",
+      passwordHint: passwordHint || "",
     };
   },
 
