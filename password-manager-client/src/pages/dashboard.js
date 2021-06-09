@@ -1,13 +1,42 @@
 import React, { Component } from "react";
+import { AppBar, Drawer, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { MenuIcon, ChevronLeftIcon } from "@material-ui/icons";
 
-class vault extends Component{
-    constructor(){
+class dashboard extends Component {
+  constructor() {
+    super();
+  }
 
-    }
-
-    render(){
-        return(
-            
-        );
-    }
+  render() {
+    return (
+      <div>
+        <AppBar position="absolute">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap>
+              Your Dashboard
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent">
+          <div className="toolbarIcon">
+            <IconButton onclick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider/>
+          
+        </Drawer>
+      </div>
+    );
+  }
 }
+
+export default dashboard;

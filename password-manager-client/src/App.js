@@ -5,6 +5,7 @@ import frontPage from "./pages/frontPage";
 import welcome from "./pages/welcome";
 import "./App.css";
 import { pink, purple } from "@material-ui/core/colors";
+import dashboard from "./pages/dashboard";
 
 const theme = createMuiTheme({
   palette: {
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={frontPage} />
           <Route path="/welcome" component={welcome} />
+          <Route path="/dashboard" component={dashboard} />
         </Switch>
       </Router>
     </ThemeProvider>
