@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, NavLink, Switch, Link } from "react-router-dom";
+import { HashRouter as Router, Route, NavLink, Link } from "react-router-dom";
 import { Paper, Grid, Typography } from "@material-ui/core";
 import signUp from "../components/signUp";
 import logIn from "../components/logIn";
