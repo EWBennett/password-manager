@@ -10,69 +10,88 @@ const form = (props) => {
 
   return (
     <Paper elevation={3}>
-      <form className="formFields" onSubmit={handleSubmit}>
-        <Grid container direction="column" spacing={2}>
-          <TextField
-            required
-            id="passwordName"
-            color="primary"
-            variant="outlined"
-            label="Name"
-            placeholder="Name"
-            value={values.passwordName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.passwordName && Boolean(errors.passwordName)}
-            helperText={touched.passwordName ** Boolean(errors.passwordName)}
-            autoFocus
-          />
-          <TextField
-            id="URL"
-            color="primary"
-            variant="outlined"
-            label="Website Address"
-            placeholder="Address"
-            value={values.URL}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="password"
-            color="primary"
-            variant="outlined"
-            label="Website password"
-            placeholder="Password"
-            type="password"
-            autoComplete="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="username"
-            color="primary"
-            variant="outlined"
-            label="Website username"
-            placeholder="Username"
-            autoComplete="username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="notes"
-            color="primary"
-            variant="outlined"
-            label="Notes"
-            value={values.notes}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
-            Save
-          </Button>
-        </Grid>
-      </form>
+      <div className="formWrap">
+        <form className="formFields" onSubmit={handleSubmit}>
+          <Grid container direction="column" spacing={1}>
+            <Grid item>
+              <TextField
+                required
+                id="passwordName"
+                color="primary"
+                variant="outlined"
+                label="Name"
+                placeholder="Name"
+                value={values.passwordName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.passwordName && Boolean(errors.passwordName)}
+                autoFocus
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="URL"
+                color="primary"
+                variant="outlined"
+                label="Website Address"
+                placeholder="Address"
+                value={values.URL}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="username"
+                color="primary"
+                variant="outlined"
+                label="Website username"
+                placeholder="Username"
+                autoComplete="username"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="password"
+                color="primary"
+                variant="outlined"
+                label="Website password"
+                placeholder="Password"
+                type="password"
+                autoComplete="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="notes"
+                color="primary"
+                variant="outlined"
+                label="Notes"
+                value={values.notes}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                disabled={isSubmitting}
+                onClick={passwordForm}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
     </Paper>
   );
 };

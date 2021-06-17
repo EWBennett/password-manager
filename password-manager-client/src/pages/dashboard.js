@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Router, Route, NavLink, Link } from "react-router-dom";
 import clsx from "clsx";
 import {
   AppBar,
@@ -13,16 +14,32 @@ import {
   ListItemIcon,
   ListItemText,
   Grid,
+  Box,
   Paper,
   makeStyles,
   useTheme,
 } from "@material-ui/core";
-import { Menu, ChevronLeft, Home, Add, Autorenew, Settings } from "@material-ui/icons";
+import {
+  Menu,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Add,
+  Autorenew,
+  Settings,
+} from "@material-ui/icons";
+import vault from "../components/vault";
+import passwordForm from "../components/passwordForm";
+import passwordGenerator from "../components/passwordGenerator";
+import settings from "../components/settings";
 import logo from "../Assets/Mimir Logo Light.png";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -38,8 +55,16 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  appBarSpacer: theme.mixins.toolbar,
   menuButton: {
     marginRight: 36,
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -62,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1,
+      width: theme.spacing(7) + 1,
     },
   },
   toolbar: {
@@ -74,6 +99,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  container: {
+    padding: theme.spacing(4),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
   },
 }));
 
@@ -90,7 +126,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       {/* Top navigation bar */}
       <AppBar
         position="absolute"
@@ -130,33 +166,45 @@ export default function Dashboard() {
         }}
       >
         <div className={classes.toolbar}>
-          <div></div>
-          <img className="logo" src={logo} alt="" width="900" height="1480"></img>
-          <IconButton onclick={handleDrawerClose}>
-            <ChevronLeft style={{ color: "white" }} />
+          <div className="paddingDiv" />
+          <img
+            src={logo}
+            alt=""
+            width="102px"
+            height="160px"
+            className={clsx({ [classes.hide]: !open })}
+          ></img>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronRight style={{ color: "white" }} />
+            ) : (
+              <ChevronLeft style={{ color: "white" }} />
+            )}
           </IconButton>
         </div>
-        <Divider />
+        <Box m={2}>
+          <Divider variant="middle" />
+        </Box>
         <List>
-          <ListItem button>
+          <ListItem button component={NavLink} to="/dashboard/vault">
             <ListItemIcon>
               <Home style={{ color: "white" }} />
             </ListItemIcon>
             <ListItemText primary="Vault" />
           </ListItem>
-          <ListItem button>
+          <ListItem button component={NavLink} to="/dashboard/addpassword">
             <ListItemIcon>
               <Add style={{ color: "white" }} />
             </ListItemIcon>
             <ListItemText primary="Add a password" />
           </ListItem>{" "}
-          <ListItem button>
+          <ListItem button component={NavLink} to="/dashboard/generate">
             <ListItemIcon>
               <Autorenew style={{ color: "white" }} />
             </ListItemIcon>
             <ListItemText primary="Generate a new password" />
           </ListItem>{" "}
-          <ListItem button>
+          <ListItem button component={NavLink} to="/dashboard/settings">
             <ListItemIcon>
               <Settings style={{ color: "white" }} />
             </ListItemIcon>
@@ -165,12 +213,14 @@ export default function Dashboard() {
         </List>
       </Drawer>
       {/* Body of the page*/}
-      <main>
-        <Container maxWidth="lg">
-          <Grid item xs={12} md={8} lg={9}>
-            <Paper>
-              <Typography>Test</Typography>
-            </Paper>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            <Route exact path="/dashboard/vault" component={vault} />
+            <Route exact path="/dashboard/addpassword" component={passwordForm} />
+            <Route exact path="/dashboard/generate" component={passwordGenerator} />
+            <Route exact path="/dashboard/settings" component={settings} />
           </Grid>
         </Container>
       </main>

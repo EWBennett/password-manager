@@ -20,7 +20,7 @@ class welcome extends Component {
           <div className="App">
             <Paper elevation={3}>
               <div className="formWrap">
-                <Grid container direction="column" spacing={2}>
+                <Grid container direction="column" spacing={1}>
                   <Grid item>
                     <Typography variant="h5" component={NavLink} to="/signup">
                       Create an account
@@ -30,10 +30,8 @@ class welcome extends Component {
                       Log in
                     </Typography>
                   </Grid>
-                  <Grid item>
-                    <Route exact path="/login" component={logIn} />
-                    <Route exact path="/signup" component={signUp} />
-                  </Grid>
+                  <Route exact path="/login" component={logIn} />
+                  <Route exact path="/signup" component={signUp} />
                 </Grid>
               </div>
             </Paper>
