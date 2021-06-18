@@ -12,7 +12,7 @@ const form = (props) => {
     <Paper elevation={3}>
       <div className="formWrap">
         <form className="formFields" onSubmit={handleSubmit}>
-          <Grid container direction="column" spacing={1}>
+          <Grid container direction="column" alignItems="center" spacing={1}>
             <Grid item>
               <TextField
                 required

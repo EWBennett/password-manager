@@ -11,7 +11,7 @@ import {
   InputAdornment,
   Checkbox,
 } from "@material-ui/core";
-import { Visibility, VisibilityOff, FileCopy } from "@material-ui/icons";
+import { FileCopy } from "@material-ui/icons";
 import copy from "clipboard-copy";
 
 export default function Generator() {
@@ -25,15 +25,37 @@ export default function Generator() {
     symbols: true,
   });
   const [password, setPassword] = useState("");
-  const [length, setLength]=useState("");
-  const { lowercase, uppercase, numbers, symbols } = state;
+  const [length, setLength] = useState("");
+  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const num = "1234567890";
+  const sym = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
-  function generate() {}
+  function generate() {
+    var charset = "";
+    var result = "";
+    if (lowercase) {
+      charset += lower;
+    }
+    if (uppercase) {
+      charset += upper;
+    }
+    if (numbers) {
+      charset += num;
+    }
+    if (symbols) {
+      charset += sym;
+    }
+    for (var i = 0, n = charset.length; i < length; i++) {
+      result += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return result;
+  }
 
   return (
     <Paper elevation={3}>
       <div className="formWrap">
-        <Grid container justify="center" spacing={1}>
+        <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={12}>
             <TextField
               id="password"
