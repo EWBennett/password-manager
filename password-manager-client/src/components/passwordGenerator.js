@@ -25,6 +25,7 @@ export default function Generator() {
     symbols: true,
   });
   const [password, setPassword] = useState("");
+  const [length, setLength]=useState("");
   const { lowercase, uppercase, numbers, symbols } = state;
 
   function generate() {}
@@ -55,7 +56,14 @@ export default function Generator() {
           <FormControl component="fieldset">
             <FormGroup column>
               <Grid item>
-                <TextField id="length" label="Length" type="number" defaultValue="16" />
+                <TextField
+                  id="length"
+                  label="Length"
+                  type="number"
+                  defaultValue="16"
+                  value={length}
+                  onChange={(e) => setLength(e.target.value)}
+                />
               </Grid>
               <Grid container item>
                 <Grid item>
