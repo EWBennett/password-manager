@@ -24,8 +24,9 @@ export default function Generator() {
     numbers: true,
     symbols: true,
   });
+  const { lowercase, uppercase, numbers, symbols } = state;
   const [password, setPassword] = useState("");
-  const [length, setLength] = useState("");
+  const [length, setLength] = useState("16");
   const lower = "abcdefghijklmnopqrstuvwxyz";
   const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const num = "1234567890";
@@ -49,7 +50,7 @@ export default function Generator() {
     for (var i = 0, n = charset.length; i < length; i++) {
       result += charset.charAt(Math.floor(Math.random() * n));
     }
-    return result;
+    setPassword(result);
   }
 
   return (
@@ -82,7 +83,6 @@ export default function Generator() {
                   id="length"
                   label="Length"
                   type="number"
-                  defaultValue="16"
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
                 />
@@ -91,7 +91,12 @@ export default function Generator() {
                 <Grid item>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={state.checkedA} onChange={handleChange} name="lowercase" />
+                      <Checkbox
+                        checked={state.checkedA}
+                        onChange={handleChange}
+                        name="lowercase"
+                        checked={lowercase}
+                      />
                     }
                     label="Lowercase"
                   />
@@ -99,7 +104,12 @@ export default function Generator() {
                 <Grid item>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={state.checkedA} onChange={handleChange} name="uppercase" />
+                      <Checkbox
+                        checked={state.checkedA}
+                        onChange={handleChange}
+                        name="uppercase"
+                        checked={uppercase}
+                      />
                     }
                     label="Uppercase"
                   />
@@ -109,7 +119,12 @@ export default function Generator() {
                 <Grid item>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={state.checkedA} onChange={handleChange} name="numbers" />
+                      <Checkbox
+                        checked={state.checkedA}
+                        onChange={handleChange}
+                        name="numbers"
+                        checked={numbers}
+                      />
                     }
                     label="Numbers"
                   />
@@ -117,7 +132,12 @@ export default function Generator() {
                 <Grid item>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={state.checkedA} onChange={handleChange} name="symbols" />
+                      <Checkbox
+                        checked={state.checkedA}
+                        onChange={handleChange}
+                        name="symbols"
+                        checked={symbols}
+                      />
                     }
                     label="Symbols"
                   />

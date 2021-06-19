@@ -1,19 +1,17 @@
 import React from "react";
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
+import passwordForm from "./passwordForm";
 
 export default function Vault() {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMore />}>
-        <Typography>This is a placeholder password entry</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
         <Typography>
-          This is where the rest of the information about the password should go. I should probably
-          keep writing so it's a bit longer.
+          This is a placeholder password entry. This should be the name of the password record.
         </Typography>
-      </AccordionDetails>
+      </AccordionSummary>
+      <AccordionDetails>component={passwordForm}</AccordionDetails>
     </Accordion>
   );
 }

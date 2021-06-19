@@ -10,86 +10,111 @@ const form = (props) => {
 
   return (
     <Paper elevation={3}>
-      <form className="formFields" onSubmit={handleSubmit}>
-        <Grid container direction="column" spacing={2}>
-          <TextField
-            required
-            id="passwordName"
-            color="primary"
-            variant="outlined"
-            label="Name"
-            placeholder="Name"
-            value={values.passwordName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.passwordName && Boolean(errors.passwordName)}
-            helperText={touched.passwordName ** Boolean(errors.passwordName)}
-            autoFocus
-          />
-          <TextField
-            id="URL"
-            color="primary"
-            variant="outlined"
-            label="Website Address"
-            placeholder="Address"
-            value={values.URL}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="password"
-            color="primary"
-            variant="outlined"
-            label="Website password"
-            placeholder="Password"
-            type="password"
-            autoComplete="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="username"
-            color="primary"
-            variant="outlined"
-            label="Website username"
-            placeholder="Username"
-            autoComplete="username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <TextField
-            id="notes"
-            color="primary"
-            variant="outlined"
-            label="Notes"
-            value={values.notes}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Button variant="contained" color="secondary" type="submit" disabled={isSubmitting}>
-            Save
-          </Button>
-        </Grid>
-      </form>
+      <div className="formWrap">
+        <form className="formFields" onSubmit={handleSubmit}>
+          <Grid container direction="column" alignItems="center" spacing={1}>
+            <Grid item>
+              <TextField
+                id="username"
+                color="primary"
+                variant="outlined"
+                label="Your username"
+                placeholder="Username"
+                autoComplete="username"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="email"
+                color="primary"
+                variant="outlined"
+                label="Your email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="password"
+                color="primary"
+                variant="outlined"
+                label="Your account password"
+                placeholder="Password"
+                type="password"
+                autoComplete="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                id="confirmPassword"
+                color="primary"
+                variant="outlined"
+                label="Confirm Password"
+                placeholder="Password"
+                type="password"
+                autoComplete="password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                helperText={touched.confirmPassword && errors.confirmPassword}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="passwordHint"
+                color="primary"
+                variant="outlined"
+                label="Notes"
+                value={values.passwordHint}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                disabled={isSubmitting}
+                onClick={settings}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
     </Paper>
   );
 };
 
-const passwordForm = withFormik({
-  mapPropsToValues: ({ passwordName, URL, password, username, notes }) => {
+const settings = withFormik({
+  mapPropsToValues: ({ username, email, password, confirmPassword, passwordHint }) => {
     return {
-      passwordName: passwordName || "",
-      URL: URL || "",
-      password: password || "",
       username: username || "",
-      notes: notes || "",
+      email: email || "",
+      password: password || "",
+      confirmPassword: confirmPassword || "",
+      passwordHint: passwordHint || "",
     };
   },
 
   validationSchema: Yup.object().shape({
-    passwordName: Yup.string().required("A name is required"),
+    username: Yup.string().required(" "),
+    email: Yup.string().email("Invalid email address").required(" "),
+    password: Yup.string().min(8, "Password must contain at least 8 characters").required(" "),
+    confirmPassword: Yup.string()
+      .required(" ")
+      .oneOf([Yup.ref("password")], "Passwords do not match"),
   }),
 
   handleSubmit: (values, { setSubmitting }) => {
@@ -101,4 +126,4 @@ const passwordForm = withFormik({
   },
 })(form);
 
-export default passwordForm;
+export default settings;
