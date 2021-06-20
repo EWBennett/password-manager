@@ -8,6 +8,16 @@ import { Link } from "react-router-dom";
 const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
 
+  async function updateDetails() {
+    const { username, email, password, passwordHint } = values;
+    const response = await axios.patch("http://localhost:3100/api/auth/login", {
+      username,
+      email,
+      password,
+      passwordHint,
+    });
+  }
+
   return (
     <Paper elevation={3}>
       <div className="formWrap">
