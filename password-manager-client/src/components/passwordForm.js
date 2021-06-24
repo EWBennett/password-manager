@@ -10,7 +10,7 @@ const form = (props) => {
 
   async function savePassword() {
     const { passwordName, URL, username, password, notes } = values;
-    const response = await axios.post("http://localhost:3100/api/auth/login", {
+    const response = await axios.post("http://localhost:3100/api/passwords/me", {
       passwordName,
       URL,
       username,

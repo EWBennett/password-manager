@@ -11,7 +11,9 @@ export default function Vault() {
           This is a placeholder password entry. This should be the name of the password record.
         </Typography>
       </AccordionSummary>
-      <AccordionDetails>component={passwordForm}</AccordionDetails>
+      <AccordionDetails>
+        <passwordForm></passwordForm>
+      </AccordionDetails>
     </Accordion>
   );
 }
