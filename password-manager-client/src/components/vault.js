@@ -1,19 +1,45 @@
-import React from "react";
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
-import passwordForm from "./passwordForm";
+import axios from "axios";
+import React from "react";
 
-export default function Vault() {
-  return (
-    <Accordion>
-      <AccordionSummary expandIcon={<ExpandMore />}>
-        <Typography>
-          This is a placeholder password entry. This should be the name of the password record.
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <passwordForm></passwordForm>
-      </AccordionDetails>
-    </Accordion>
-  );
+class Vault extends React.Component {
+  constructor() {
+    super();
+    this.state = { passwords: [] };
+  }
+
+  componentDidMount() {
+    this.getPasswords();
+  }
+
+  async getPasswords() {
+    const token = localStorage.getItem("access_token");
+    const { status, data } = await axios.get("http://localhost:3100/api/passwords/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (status === 200 && data) {
+      this.setState({ passwords: data });
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.passwords.map((password) => (
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <Typography>{password?.name}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <passwordForm></passwordForm>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
+    );
+  }
 }
+export default Vault;

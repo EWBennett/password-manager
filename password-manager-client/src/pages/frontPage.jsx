@@ -1,9 +1,8 @@
+import { Box, Button, Typography, withStyles } from "@material-ui/core";
 import React, { Component } from "react";
-import { HashRouter as Router, Route, NavLink, Link } from "react-router-dom";
-import welcome from "./welcome";
-import { Container, Grid, Box, Button, Typography, withStyles } from "@material-ui/core";
-import logo from "../Assets/Mimir Logo Light.png";
+import { Link } from "react-router-dom";
 import picture from "../Assets/Cyber Crime.png";
+import logo from "../Assets/Mimir Logo Light.png";
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -34,8 +33,10 @@ class frontPage extends Component {
                 <div className="paragraphContent">
                   <WhiteTextTypography>
                     A password manager for the modern age. Because you and your data deserve the
-                    best. This is a paragraph all about how cool this product is. Please sign up to
-                    use it. You won't regret it. For sure. I promise.
+                    best. Use one master account to access every other account you use - no more
+                    forgetting pesky passwords, or reusing the same compromised password for every
+                    account. Secure your online life. This is a paragraph all about how cool this
+                    product is. Please sign up to use it. You won't regret it. For sure. I promise.
                   </WhiteTextTypography>
                 </div>
                 <Button variant="contained" color="white" component={Link} to="/welcome/signup">

@@ -1,13 +1,12 @@
 import { forwardRef, Global, Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { UserModule } from '../user/user.module';
-import { LocalStrategy } from './auth.strategy';
-import { Password } from 'src/schemas/password.schema';
-import { PassportModule } from '@nestjs/passport';
-import { AppModule } from 'src/app.module';
-import { config } from 'dotenv';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { config } from 'dotenv';
+import { AppModule } from 'src/app.module';
+import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { LocalStrategy } from './auth.strategy';
 import { JwtStrategy } from './jwt.strategy';
 
 config();
@@ -20,7 +19,7 @@ config();
     UserModule,
     JwtModule.register({
       secret: process.env.AUTH_SECRET,
-      signOptions: { expiresIn: '10m' },
+      signOptions: { expiresIn: '60m' },
     }),
   ],
   controllers: [AuthController],

@@ -1,25 +1,17 @@
 import {
   Body,
-  Controller,
-  Get,
-  Param,
-  Post,
+  Controller, Delete, Get, HttpStatus, Param, Patch, Post,
   Request,
-  Res,
-  HttpStatus,
-  Patch,
-  Delete,
-  UseGuards,
+  Res, UseGuards
 } from '@nestjs/common';
-import { PasswordService } from './password.service';
-import { request, Response } from 'express';
-import { PasswordBaseDto } from 'src/dto/password-base.dto';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
+import { PasswordBaseDto } from 'src/dto/password-base.dto';
 import { Role, Roles } from 'src/roles';
 import { JWT_STRATEGY } from '../auth/jwt.strategy';
 import { RolesGuard } from '../auth/roles.guard';
-import { AuthGuard } from '@nestjs/passport';
-import { brotliDecompress } from 'zlib';
+import { PasswordService } from './password.service';
 
 @Controller('api/passwords')
 @ApiTags('Password')

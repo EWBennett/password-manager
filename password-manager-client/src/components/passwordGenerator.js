@@ -1,18 +1,12 @@
-import React, { useState } from "react";
 import {
-  Paper,
-  Grid,
-  TextField,
-  Button,
-  FormControl,
+  Button, Checkbox, FormControl,
   FormControlLabel,
-  FormGroup,
-  IconButton,
-  InputAdornment,
-  Checkbox,
+  FormGroup, Grid, IconButton,
+  InputAdornment, Paper, TextField
 } from "@material-ui/core";
 import { FileCopy } from "@material-ui/icons";
 import copy from "clipboard-copy";
+import React, { useState } from "react";
 
 export default function Generator() {
   const handleChange = (event) => {

@@ -1,41 +1,24 @@
-import React, { Component } from "react";
-import { Router, Route, NavLink, Link } from "react-router-dom";
-import clsx from "clsx";
 import {
-  AppBar,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Typography,
-  Divider,
-  Container,
-  List,
+  AppBar, Box, Container, Divider, Drawer, fade, Grid, IconButton, InputBase, List,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  Grid,
-  Box,
-  Paper,
-  makeStyles,
-  fade,
-  useTheme,
-  InputBase,
+  ListItemText, makeStyles, Toolbar,
+  Typography, useTheme
 } from "@material-ui/core";
 import {
-  Menu,
-  ChevronLeft,
-  ChevronRight,
-  Home,
   Add,
-  Autorenew,
-  Settings,
-  Search,
+  Autorenew, ChevronLeft,
+  ChevronRight,
+  Home, Menu, Search, Settings
 } from "@material-ui/icons";
-import vault from "../components/vault";
+import clsx from "clsx";
+import React from "react";
+import { NavLink, Route } from "react-router-dom";
+import logo from "../Assets/Mimir Logo Light.png";
 import passwordForm from "../components/passwordForm";
 import passwordGenerator from "../components/passwordGenerator";
 import settings from "../components/settings";
-import logo from "../Assets/Mimir Logo Light.png";
+import vault from "../components/vault";
 
 const drawerWidth = 240;
 
@@ -87,16 +70,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
   hide: {
@@ -154,6 +137,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  let token = localStorage.getItem("access_token");
+  if (token) {
+    const { exp } = JSON.parse(atob(token.split(".")[1]));
+    if (exp * 1000 < Date.now()) {
+      localStorage.removeItem("access_token");
+      token = null;
+    }
+  }
+  if (!token) {
+    window.location.assign("/#/welcome/login");
+  }
+
   const classes = useStyles();
   const theme = useTheme();
 

@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import * as fs from 'fs';
 
 async function bootstrap() {
   // const httpsOptions = {
@@ -12,7 +11,7 @@ async function bootstrap() {
     //httpsOptions,
   });
   app.enableCors({
-    origin: 'localhost:3000',
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,

@@ -1,21 +1,11 @@
-import { Injectable, UnsupportedMediaTypeException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId, Schema } from 'mongoose';
-import { PasswordCrudDto } from 'src/dto/password-crud.dto';
-import { PasswordDto, fromPassword } from 'src/dto/password.dto';
+import * as bcrypt from 'bcrypt';
+import { Model } from 'mongoose';
 import { UserCrudDto } from 'src/dto/user-crud.dto';
-import { UserDto, fromUser } from 'src/dto/user.dto';
+import { fromUser, UserDto } from 'src/dto/user.dto';
 import { Password, PasswordDocument } from 'src/schemas/password.schema';
 import { User, UserDocument } from 'src/schemas/user.schema';
-import * as bcrypt from 'bcrypt';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import {
-  AuthTokenPayload,
-  JwtStrategy,
-  JWT_STRATEGY,
-} from '../auth/jwt.strategy';
-import { ExtractJwt } from 'passport-jwt';
-import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 
 @Injectable()
 export class UserService {

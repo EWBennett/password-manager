@@ -1,11 +1,11 @@
+import { Grid, Paper, Typography } from "@material-ui/core";
 import React, { Component } from "react";
-import { HashRouter as Router, Route, NavLink, Link } from "react-router-dom";
-import { Paper, Grid, Typography } from "@material-ui/core";
-import signUp from "../components/signUp";
-import logIn from "../components/logIn";
+import { HashRouter as Router, Link, NavLink, Route } from "react-router-dom";
 import logo from "../Assets/Mimir Logo Light.png";
+import logIn from "../components/logIn";
+import signUp from "../components/signUp";
 
-class welcome extends Component {
+class Welcome extends Component {
   constructor() {
     super();
   }
@@ -41,4 +41,4 @@ class welcome extends Component {
     );
   }
 }
-export default welcome;
+export default Welcome;

@@ -1,12 +1,9 @@
-import { Injectable, UnsupportedMediaTypeException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId, Schema } from 'mongoose';
+import { Model } from 'mongoose';
 import { PasswordCrudDto } from 'src/dto/password-crud.dto';
-import { PasswordDto, fromPassword } from 'src/dto/password.dto';
-import { UserCrudDto } from 'src/dto/user-crud.dto';
-import { UserDto, fromUser } from 'src/dto/user.dto';
+import { fromPassword, PasswordDto } from 'src/dto/password.dto';
 import { Password, PasswordDocument } from 'src/schemas/password.schema';
-import { User, UserDocument } from 'src/schemas/user.schema';
 
 @Injectable()
 export class PasswordService {

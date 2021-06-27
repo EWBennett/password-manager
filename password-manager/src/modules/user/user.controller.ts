@@ -1,25 +1,18 @@
 import {
   Body,
-  Controller,
-  Get,
-  Param,
-  Post,
+  Controller, Delete, Get, HttpStatus, Param, Patch, Post,
   Request,
-  Res,
-  HttpStatus,
-  Patch,
-  Delete,
-  UseGuards,
+  Res, UseGuards
 } from '@nestjs/common';
-import { UserBaseDto } from 'src/dto/user-base.dto';
-import { Response } from 'express';
-import { UserService } from './user.service';
-import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { JWT_STRATEGY } from '../auth/jwt.strategy';
-import { Role, Roles } from 'src/roles';
-import { RolesGuard } from '../auth/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
+import { UserBaseDto } from 'src/dto/user-base.dto';
 import { UserCrudDto } from 'src/dto/user-crud.dto';
+import { Role, Roles } from 'src/roles';
+import { JWT_STRATEGY } from '../auth/jwt.strategy';
+import { RolesGuard } from '../auth/roles.guard';
+import { UserService } from './user.service';
 
 @Controller('api/users')
 @ApiTags('User')

@@ -1,19 +1,25 @@
-import React, { Component } from "react";
-import { Button, TextField, Grid, Paper } from "@material-ui/core";
-import { Formik, withFormik } from "formik";
-import * as Yup from "yup";
+import { Button, Grid, TextField } from "@material-ui/core";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { withFormik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 
 const form = (props) => {
+  if (localStorage.getItem("access_token")) {
+    window.location.assign("/#/dashboard");
+  }
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
 
   async function logIn() {
     const { username, password } = values;
-    const response = await axios.post("http://localhost:3100/api/auth/login", {
+    const { data, status } = await axios.post("http://localhost:3100/api/auth/login", {
       username,
       password,
     });
+    if (status === 201 && data?.access_token) {
+      localStorage.setItem("access_token", data.access_token);
+      window.location.assign("/#/dashboard/");
+    }
   }
 
   return (
@@ -77,13 +83,12 @@ const logIn = withFormik({
 
   validationSchema: Yup.object().shape({
     username: Yup.string().required(" "),
-    password: Yup.string().min(8, "Password must contain at least 8 characters").required(" "),
+    password: Yup.string().min(8, "Must be at least 8 characters").required(" "),
   }),
 
   handleSubmit: (values, { setSubmitting }) => {
     setTimeout(() => {
       // submit to the server
-      alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 1000);
   },

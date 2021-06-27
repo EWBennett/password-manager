@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, NavLink, Switch } from "react-router-dom";
+import { pink, purple } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import React from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import dashboard from "./pages/dashboard";
 import frontPage from "./pages/frontPage";
 import welcome from "./pages/welcome";
-import dashboard from "./pages/dashboard";
-import "./App.css";
-import { pink, purple } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {

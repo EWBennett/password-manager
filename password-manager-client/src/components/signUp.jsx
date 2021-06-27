@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { Button, TextField, Container, Paper, Grid } from "@material-ui/core";
-import { Formik, withFormik } from "formik";
-import * as Yup from "yup";
+import { Button, Grid, TextField } from "@material-ui/core";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { SignalCellularNullSharp } from "@material-ui/icons";
+import { withFormik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 
 const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
@@ -69,6 +67,7 @@ const form = (props) => {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
           />
         </Grid>
         <Grid item>
@@ -130,7 +129,7 @@ const signUp = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required(" "),
     email: Yup.string().email("Invalid email address").required(" "),
-    password: Yup.string().min(8, "Password must contain at least 8 characters").required(" "),
+    password: Yup.string().min(8, "Must be at least 8 characters").required(" "),
     confirmPassword: Yup.string()
       .required(" ")
       .oneOf([Yup.ref("password")], "Passwords do not match"),
@@ -139,7 +138,6 @@ const signUp = withFormik({
   handleSubmit: (values, { setSubmitting }) => {
     setTimeout(() => {
       // submit to the server
-      alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 1000);
   },
