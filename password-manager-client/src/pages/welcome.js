@@ -2,8 +2,8 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { HashRouter as Router, Link, NavLink, Route } from "react-router-dom";
 import logo from "../Assets/Mimir Logo Light.png";
-import logIn from "../components/logIn";
-import signUp from "../components/signUp";
+import LogIn from "./LogIn";
+import SignUp from "./SignUp";
 
 class Welcome extends Component {
   constructor() {
@@ -30,8 +30,8 @@ class Welcome extends Component {
                       Log in
                     </Typography>
                   </Grid>
-                  <Route exact path="/login" component={logIn} />
-                  <Route exact path="/signup" component={signUp} />
+                  <Route exact path="/login" component={LogIn} />
+                  <Route exact path="/signup" component={SignUp} />
                 </Grid>
               </div>
             </Paper>

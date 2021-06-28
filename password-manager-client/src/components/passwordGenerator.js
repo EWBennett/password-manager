@@ -1,8 +1,14 @@
 import {
-  Button, Checkbox, FormControl,
+  Button,
+  Checkbox,
+  FormControl,
   FormControlLabel,
-  FormGroup, Grid, IconButton,
-  InputAdornment, Paper, TextField
+  FormGroup,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
 } from "@material-ui/core";
 import { FileCopy } from "@material-ui/icons";
 import copy from "clipboard-copy";
@@ -47,6 +53,10 @@ export default function Generator() {
     setPassword(result);
   }
 
+  function copyToClipboard() {
+    copy(password);
+  }
+
   return (
     <Paper elevation={3}>
       <div className="formWrap">
@@ -62,7 +72,7 @@ export default function Generator() {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton aria-label="copy to clipboard" onClick={copy(password)}>
+                    <IconButton aria-label="copy to clipboard" onClick={copyToClipboard}>
                       <FileCopy />
                     </IconButton>
                   </InputAdornment>

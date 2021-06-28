@@ -3,9 +3,9 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import dashboard from "./pages/dashboard";
-import frontPage from "./pages/frontPage";
-import welcome from "./pages/welcome";
+import Dashboard from "./pages/Dashboard";
+import FrontPage from "./pages/FrontPage";
+import Welcome from "./pages/Welcome";
 
 const theme = createMuiTheme({
   palette: {
@@ -22,9 +22,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route exact path="/" component={frontPage} />
-          <Route path="/welcome" component={welcome} />
-          <Route path="/dashboard" component={dashboard} />
+          <Route exact path="/" component={FrontPage} />
+          <Route path="/welcome" component={Welcome} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </ThemeProvider>

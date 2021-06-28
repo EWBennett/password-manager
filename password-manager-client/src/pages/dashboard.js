@@ -1,24 +1,40 @@
 import {
-  AppBar, Box, Container, Divider, Drawer, fade, Grid, IconButton, InputBase, List,
+  AppBar,
+  Box,
+  Container,
+  Divider,
+  Drawer,
+  fade,
+  Grid,
+  IconButton,
+  InputBase,
+  List,
   ListItem,
   ListItemIcon,
-  ListItemText, makeStyles, Toolbar,
-  Typography, useTheme
+  ListItemText,
+  makeStyles,
+  Toolbar,
+  Typography,
+  useTheme,
 } from "@material-ui/core";
 import {
   Add,
-  Autorenew, ChevronLeft,
+  Autorenew,
+  ChevronLeft,
   ChevronRight,
-  Home, Menu, Search, Settings
+  Home,
+  Menu,
+  Search,
+  Settings,
 } from "@material-ui/icons";
 import clsx from "clsx";
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import logo from "../Assets/Mimir Logo Light.png";
-import passwordForm from "../components/passwordForm";
-import passwordGenerator from "../components/passwordGenerator";
-import settings from "../components/settings";
-import vault from "../components/vault";
+import PasswordGenerator from "../components/PasswordGenerator";
+import AddPassword from "./AddPassword";
+import ChangeSettings from "./ChangeSettings";
+import Vault from "./Vault";
 
 const drawerWidth = 240;
 
@@ -152,6 +168,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
 
+  const [searchQuery, setSearchQuery] = React.useState("");
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -190,6 +207,8 @@ export default function Dashboard() {
             </div>
             <InputBase
               placeholder="Search…"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -265,10 +284,14 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Route exact path="/dashboard/vault" component={vault} />
-            <Route exact path="/dashboard/addpassword" component={passwordForm} />
-            <Route exact path="/dashboard/generate" component={passwordGenerator} />
-            <Route exact path="/dashboard/settings" component={settings} />
+            <Route
+              exact
+              path="/dashboard/vault"
+              component={() => <Vault searchQuery={searchQuery} />}
+            />
+            <Route exact path="/dashboard/addpassword" component={AddPassword} />
+            <Route exact path="/dashboard/generate" component={PasswordGenerator} />
+            <Route exact path="/dashboard/settings" component={ChangeSettings} />
           </Grid>
         </Container>
       </main>
