@@ -15,7 +15,7 @@ export default class ChangeSettings extends Component {
   async getUser() {
     const token = localStorage.getItem("access_token");
     try {
-      const { status, data: user } = await axios.get("http://localhost:3100/api/users/me", {
+      const { status, data: user } = await axios.get("https://localhost:3100/api/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

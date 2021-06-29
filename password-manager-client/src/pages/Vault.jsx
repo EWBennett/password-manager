@@ -25,7 +25,7 @@ class Vault extends React.Component {
     const token = localStorage.getItem("access_token");
     try {
       const { status, data: passwords } = await axios.get(
-        "http://localhost:3100/api/passwords/me/",
+        "https://localhost:3100/api/passwords/me/",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ class Vault extends React.Component {
   async deletePassword(id) {
     const token = localStorage.getItem("access_token");
     try {
-      const { status } = await axios.delete(`http://localhost:3100/api/passwords/me/${id}`, {
+      const { status } = await axios.delete(`https://localhost:3100/api/passwords/me/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +58,7 @@ class Vault extends React.Component {
   render() {
     console.log(this.props.searchQuery);
     return (
-      <div>
+      <div style={{ width: "100%" }}>
         {this.state.passwords
           .filter((password) => {
             return (password?.name || "")
@@ -76,7 +76,7 @@ class Vault extends React.Component {
             };
             console.log(passwordRecord);
             return (
-              <Accordion key={password?.id}>
+              <Accordion style={{ width: "100%" }} key={password?.id}>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   <Typography>{password?.name}</Typography>
                 </AccordionSummary>
@@ -87,9 +87,8 @@ class Vault extends React.Component {
                     </Grid>
                     <Grid item>
                       <Button
-                        variant="contained"
-                        color="secondary"
-                        type="submit"
+                        color="error"
+                        type="button"
                         onClick={async () => {
                           await this.deletePassword(passwordRecord.id);
                         }}

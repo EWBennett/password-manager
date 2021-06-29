@@ -9,12 +9,12 @@ export interface PasswordDto extends PasswordBaseDto {
   notes?: string;
 }
 
-export function fromPassword(password: PasswordDocument): PasswordDto {
+export function fromPassword(password: PasswordDocument, decryptedPassword: string): PasswordDto {
   return {
     id: password._id,
     userID: password.userID,
     name: password.name,
-    password: password.password,
+    password: decryptedPassword,
     URL: password.URL,
     username: password.username,
     notes: password.notes,

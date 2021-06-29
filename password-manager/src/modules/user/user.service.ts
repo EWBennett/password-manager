@@ -41,11 +41,16 @@ export class UserService {
   }
 
   /**
-   * Create a new user and save it to the database
+   * Create a new user, hash their password, and save it to the database
    * @param {UserCrudDto} createUserDto A DTO of the new user to be saved
    */
   async createUser(createUserDto: UserCrudDto): Promise<string> {
-    const createdUser = new this.userModel(createUserDto);
+    const passwordSalt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(
+      createUserDto.password,
+      passwordSalt,
+    );
+    const createdUser = new this.userModel({ ...createUserDto, passwordHash });
     const result = await createdUser.save();
     return result._id;
   }

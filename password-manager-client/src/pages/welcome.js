@@ -22,11 +22,11 @@ class Welcome extends Component {
               <div className="formWrap">
                 <Grid container direction="column" spacing={1}>
                   <Grid item>
-                    <Typography variant="h5" component={NavLink} to="/signup">
+                    <Typography variant="h5" component={NavLink} to="/signup" color="secondary">
                       Create an account
                     </Typography>{" "}
                     or{" "}
-                    <Typography variant="h5" component={NavLink} to="/login">
+                    <Typography variant="h5" component={NavLink} to="/login" color="secondary">
                       Log in
                     </Typography>
                   </Grid>

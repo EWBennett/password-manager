@@ -1,5 +1,6 @@
-import { pink, purple } from "@material-ui/core/colors";
+import { deepPurple, pink, purple, teal, cyan } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -7,17 +8,20 @@ import Dashboard from "./pages/Dashboard";
 import FrontPage from "./pages/FrontPage";
 import Welcome from "./pages/Welcome";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: purple,
-    secondary: pink,
-  },
-  typography: {
-    fontFamily: "Raleway",
-  },
-});
-
 function App() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = React.useMemo(() =>
+    createMuiTheme({
+      palette: {
+        primary: deepPurple,
+        secondary: teal,
+        type: prefersDarkMode ? "dark" : "light",
+      },
+      typography: {
+        fontFamily: "Raleway",
+      },
+    })
+  );
   return (
     <ThemeProvider theme={theme}>
       <Router>

@@ -12,6 +12,9 @@ export class Password {
   password: string;
 
   @Prop()
+  iv: string;
+
+  @Prop()
   name: string;
 
   @Prop()

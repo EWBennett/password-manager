@@ -1,10 +1,10 @@
-import { Button, Grid, Paper, TextField, InputAdornment, IconButton } from "@material-ui/core";
+import { Button, Grid, IconButton, InputAdornment, TextField } from "@material-ui/core";
 import { FileCopy } from "@material-ui/icons";
 import axios from "axios";
+import * as copy from "clipboard-copy";
 import { withFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import * as copy from "clipboard-copy";
 
 const form = (props) => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
@@ -15,7 +15,7 @@ const form = (props) => {
     if (id) {
       try {
         const response = await axios.patch(
-          `http://localhost:3100/api/passwords/me/${id}`,
+          `https://localhost:3100/api/passwords/me/${id}`,
           {
             name,
             URL,
@@ -35,7 +35,7 @@ const form = (props) => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:3100/api/passwords/me",
+          "https://localhost:3100/api/passwords/me",
           {
             name,
             URL,
@@ -69,6 +69,7 @@ const form = (props) => {
           <Grid item>
             <TextField
               required
+              fullWidth
               id="passwordName"
               color="primary"
               variant="outlined"
@@ -79,6 +80,7 @@ const form = (props) => {
               onBlur={handleBlur}
               error={touched.passwordName && Boolean(errors.passwordName)}
               autoFocus
+              style={{ width: 300 }}
             />
           </Grid>
           <Grid item>
@@ -91,6 +93,7 @@ const form = (props) => {
               value={values.URL}
               onChange={handleChange}
               onBlur={handleBlur}
+              style={{ width: 300 }}
             />
           </Grid>
           <Grid item>
@@ -113,6 +116,7 @@ const form = (props) => {
                   </InputAdornment>
                 ),
               }}
+              style={{ width: 300 }}
             />
           </Grid>
           <Grid item>
@@ -136,6 +140,7 @@ const form = (props) => {
                   </InputAdornment>
                 ),
               }}
+              style={{ width: 300 }}
             />
           </Grid>
           <Grid item>
@@ -147,6 +152,7 @@ const form = (props) => {
               value={values.notes}
               onChange={handleChange}
               onBlur={handleBlur}
+              style={{ width: 300 }}
             />
           </Grid>
           <Grid item>
@@ -156,6 +162,7 @@ const form = (props) => {
               type="submit"
               disabled={isSubmitting}
               onClick={savePassword}
+              style={{ width: 100 }}
             >
               Save
             </Button>

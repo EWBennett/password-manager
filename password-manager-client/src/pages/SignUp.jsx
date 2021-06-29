@@ -10,12 +10,13 @@ const form = (props) => {
   async function signUp() {
     const { username, email, password, passwordHint } = values;
     try {
-      const response = await axios.post("http://localhost:3100/api/users/signup", {
+      const response = await axios.post("https://localhost:3100/api/users/signup", {
         username,
         email,
         password,
         passwordHint,
       });
+      window.location.assign("/#/dashboard/vault");
     } catch (e) {
       console.error(`SIGN UP FAILED: ${e}`);
     }

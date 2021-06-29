@@ -60,13 +60,13 @@ export default function Generator() {
   return (
     <Paper elevation={3}>
       <div className="formWrap">
-        <Grid container justify="center" alignItems="center" spacing={1}>
+        <Grid container justify="center" alignItems="center" direction="column" spacing={1}>
           <Grid item xs={12}>
             <TextField
               id="password"
               color="primary"
               variant="outlined"
-              fullWidth="true"
+              fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               InputProps={{
@@ -78,6 +78,7 @@ export default function Generator() {
                   </InputAdornment>
                 ),
               }}
+              style={{ width: 500 }}
             />
           </Grid>
           <FormControl component="fieldset">
@@ -89,6 +90,7 @@ export default function Generator() {
                   type="number"
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
+                  style={{ width: 250 }}
                 />
               </Grid>
               <Grid container item>
@@ -147,13 +149,13 @@ export default function Generator() {
                   />
                 </Grid>
               </Grid>
-              <Grid item>
-                <Button variant="contained" color="secondary" onClick={generate}>
-                  Generate
-                </Button>
-              </Grid>
             </FormGroup>
           </FormControl>
+          <Grid item xs={12}>
+            <Button variant="contained" color="secondary" onClick={generate} style={{ width: 250 }}>
+              Generate
+            </Button>
+          </Grid>
         </Grid>
       </div>
     </Paper>

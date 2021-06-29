@@ -13,6 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   makeStyles,
+  Paper,
   Toolbar,
   Typography,
   useTheme,
@@ -69,12 +70,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
+    marginLeft: theme.spacing(2),
+    justifySelf: 'center',
+    alignSelf: 'center',
+    width: "35%",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -87,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
+    width: "100%",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -94,9 +94,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
+
   },
   hide: {
     display: "none",
@@ -107,8 +105,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    background: "purple",
-    backgroundColor: "purple",
+    background: "#482880",
+    backgroundColor: "#482880",
     color: "white",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -116,8 +114,8 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   drawerClose: {
-    background: "purple",
-    backgroundColor: "purple",
+    background: "#482880",
+    backgroundColor: "#482880",
     color: "white",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -140,15 +138,18 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   content: {
-    flexGrow: 1,
     height: "100vh",
+    width: "100vw",
+    display: "auto",
     overflow: "auto",
+    alignContent: "center",
   },
   container: {
     padding: theme.spacing(4),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
+  },
+  background: {
+    height: "100%",
+    width: "100%",
   },
 }));
 
@@ -281,19 +282,21 @@ export default function Dashboard() {
       </Drawer>
       {/* Body of the page*/}
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Route
-              exact
-              path="/dashboard/vault"
-              component={() => <Vault searchQuery={searchQuery} />}
-            />
-            <Route exact path="/dashboard/addpassword" component={AddPassword} />
-            <Route exact path="/dashboard/generate" component={PasswordGenerator} />
-            <Route exact path="/dashboard/settings" component={ChangeSettings} />
-          </Grid>
-        </Container>
+        <Paper className={classes.background}>
+          <div className={classes.appBarSpacer} />
+          <Container className={classes.container}>
+            <Grid container spacing={3} justify="center">
+              <Route
+                exact
+                path="/dashboard/vault"
+                component={() => <Vault searchQuery={searchQuery} />}
+              />
+              <Route exact path="/dashboard/addpassword" component={AddPassword} />
+              <Route exact path="/dashboard/generate" component={PasswordGenerator} />
+              <Route exact path="/dashboard/settings" component={ChangeSettings} />
+            </Grid>
+          </Container>
+        </Paper>
       </main>
     </div>
   );

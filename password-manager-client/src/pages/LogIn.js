@@ -13,13 +13,13 @@ const form = (props) => {
   async function logIn() {
     const { username, password } = values;
     try {
-      const { data, status } = await axios.post("http://localhost:3100/api/auth/login", {
+      const { data, status } = await axios.post("https://localhost:3100/api/auth/login", {
         username,
         password,
       });
       if (status === 201 && data?.access_token) {
         localStorage.setItem("access_token", data.access_token);
-        window.location.assign("/#/dashboard/");
+        window.location.assign("/#/dashboard/vault");
       }
     } catch (e) {
       console.error(`LOGIN FAILED: ${e}`);

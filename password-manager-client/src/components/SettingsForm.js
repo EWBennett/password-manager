@@ -12,7 +12,7 @@ const form = (props) => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.patch(
-        "http://localhost:3100/api/users/me",
+        "https://localhost:3100/api/users/me",
         {
           username,
           email,
