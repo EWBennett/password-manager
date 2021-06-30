@@ -77,7 +77,7 @@ export class PasswordService {
   }
 
   /**
-   * Delete a password record, only executable by an admin
+   * Delete a password record
    * @param {string} passwordID The ID of the password to be deleted
    */
   async deletePassword(passwordID: string): Promise<void> {
@@ -107,7 +107,7 @@ export class PasswordService {
                   return rej(e);
                 });
             } catch (e) {
-              // password is not encrypted lol
+              // password is not encrypted
               acc(encryptedPassword);
             }
           }).catch((e) => {

@@ -56,7 +56,6 @@ class Vault extends React.Component {
   }
 
   render() {
-    console.log(this.props.searchQuery);
     return (
       <div style={{ width: "100%" }}>
         {this.state.passwords
@@ -74,7 +73,6 @@ class Vault extends React.Component {
               username: password?.username || "",
               notes: password?.notes || "",
             };
-            console.log(passwordRecord);
             return (
               <Accordion style={{ width: "100%" }} key={password?.id}>
                 <AccordionSummary expandIcon={<ExpandMore />}>

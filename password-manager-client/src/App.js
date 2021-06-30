@@ -1,4 +1,4 @@
-import { deepPurple, pink, purple, teal, cyan } from "@material-ui/core/colors";
+import { deepPurple, teal } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";

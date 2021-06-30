@@ -22,10 +22,10 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<UserDto> {
     //Get a user by username
     const user = await this.userservice.getByUsername(username);
-    //Hash the passed through password and compare it to the user's stored hashed password
     if (!user) {
       throw 'User does not exist';
     }
+    //Hash the passed through password and compare it to the user's stored hashed password
     if (await bcrypt.compare(password, user.passwordHash)) {
       const result = fromUser(user);
       return result;

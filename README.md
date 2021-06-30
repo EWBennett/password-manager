@@ -29,8 +29,11 @@ The frontend can be run by navigating to the
 entering "npm run start". Make sure dependencies are installed by
 running "npm install" first.
 
-A populated MongoDB database file has been included in the Assets
-folder. An absolute path to the MongoDB database must be included
+Two populated MongoDB collections (one for users, one for passwords) have
+been included in the Assets folder as JSON files that can be imported with
+mongoimport that can be found here: https://docs.mongodb.com/database-tools/mongoimport/
+
+An absolute path to the MongoDB database must be included
 in the .env file under DATABASE_ADDRESS. The default address is
 "mongodb://127.0.0.1:27017/example-database".
 
@@ -38,10 +41,11 @@ The included database file contains 3 example users, each of which
 have 5 password records. The log in details for each example user
 are listed below.
 
-Username Password
+Username            Password
 
-ExampleUser1 ExamplePassword
+ExampleUser1        ExamplePassword
 
-ASecondExampleuser ThisIsAnExamplePassword!
+ASecondExampleuser  ThisIsAnExamplePassword!
 
-TheFinalExample Secure_Password9
+TheFinalExample     Secure_Password9
+
