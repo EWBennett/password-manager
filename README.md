@@ -1,5 +1,12 @@
 # Mimir: A Password Manager
 
+Mimir is a password manager built as a JavaScript web application using NestJS and the MERN software stack.
+
+![image](https://user-images.githubusercontent.com/14060766/130448760-4844e54b-19ee-4ebc-bad5-8a0ed42b6c4a.png)
+
+![image](https://user-images.githubusercontent.com/14060766/130448722-ff9b8e71-2307-492d-bc23-1c7a4cb54942.png)
+
+## Instructions
 This project has only been tested on Windows machines.
 
 The backend needs a .env file to be created and placed in
