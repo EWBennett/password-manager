@@ -4,9 +4,9 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./pages/Dashboard";
-import FrontPage from "./pages/FrontPage";
-import Welcome from "./pages/Welcome";
+import Dashboard from "./pages/dashboard";
+import FrontPage from "./pages/frontPage";
+import Welcome from "./pages/welcome";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");

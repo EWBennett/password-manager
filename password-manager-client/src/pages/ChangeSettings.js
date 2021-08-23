@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Paper } from "@material-ui/core";
-import Settings from "../components/SettingsForm";
+import Settings from "../components/settingsForm";
 import axios from "axios";
 
 export default class ChangeSettings extends Component {

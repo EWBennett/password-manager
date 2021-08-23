@@ -2,8 +2,8 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { HashRouter as Router, Link, NavLink, Route } from "react-router-dom";
 import logo from "../Assets/Mimir Logo Light.png";
-import LogIn from "./LogIn";
-import SignUp from "./SignUp";
+import LogIn from "./logIn";
+import SignUp from "./signUp";
 
 class Welcome extends Component {
   constructor() {

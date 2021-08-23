@@ -9,7 +9,7 @@ import {
 import { ExpandMore } from "@material-ui/icons";
 import axios from "axios";
 import React from "react";
-import PasswordForm from "../components/PasswordForm";
+import PasswordForm from "../components/passwordForm";
 
 class Vault extends React.Component {
   constructor(props) {

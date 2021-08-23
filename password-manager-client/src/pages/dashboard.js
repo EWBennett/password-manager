@@ -32,10 +32,10 @@ import clsx from "clsx";
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import logo from "../Assets/Mimir Logo Light.png";
-import PasswordGenerator from "../components/PasswordGenerator";
-import AddPassword from "./AddPassword";
-import ChangeSettings from "./ChangeSettings";
-import Vault from "./Vault";
+import PasswordGenerator from "../components/passwordGenerator";
+import AddPassword from "./addPassword";
+import ChangeSettings from "./changeSettings";
+import Vault from "./vault";
 
 const drawerWidth = 240;
 
@@ -71,8 +71,8 @@ const useStyles = makeStyles((theme) => ({
     },
     marginRight: theme.spacing(2),
     marginLeft: theme.spacing(2),
-    justifySelf: 'center',
-    alignSelf: 'center',
+    justifySelf: "center",
+    alignSelf: "center",
     width: "35%",
   },
   searchIcon: {
@@ -94,7 +94,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
-
   },
   hide: {
     display: "none",

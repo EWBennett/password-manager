@@ -1,6 +1,6 @@
 import  React, { Component } from 'react';
 import { Paper } from '@material-ui/core';
-import  PasswordForm  from '../components/PasswordForm';
+import  PasswordForm  from '../components/passwordForm';
 
 export default class AddPassword extends Component {
     render () {
